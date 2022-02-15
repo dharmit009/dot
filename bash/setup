@@ -14,4 +14,5 @@ fi
 ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
 
 # Source new settings ...
-source "$HOME/.bashrc"
+. "$HOME/.bashrc"
+
