@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/hmm/repos/try-hack-me/nmap'
+let g:netrw_dirhist_2='/home/hmm'
+let g:netrw_dirhist_1='/home/hmm/repos/python/teach@Insomaniacs'
+let g:netrw_dirhist_0='/home/hmm/repos/python/College/prac'
+let g:netrw_dirhist_9='/home/hmm/repos/python/College'
+let g:netrw_dirhist_8='/home/hmm/repos/bash'
+let g:netrw_dirhist_7='/home/hmm'
+let g:netrw_dirhist_6='/home/hmm/go'
+let g:netrw_dirhist_5='/home/hmm/go/bin'
+let g:netrw_dirhist_4='/home/hmm/go'
