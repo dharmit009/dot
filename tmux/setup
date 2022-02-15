@@ -1,0 +1,19 @@
+#!/bin/sh 
+
+# Exit if any errors ...
+set -e 
+
+# Check if .bashrc exist !! If yes then create backup ...
+if [ -z "$(which tmux)" ];
+then 
+	echo "Seems like tmux is not Installed!"
+else
+	if [ -e "$HOME/.tmux.conf" ];
+	then 
+		mkdir -p "$HOME/dot-backup"
+		cp -rf "$HOME/.tmux.conf" "$HOME/dot-backup"
+	fi 
+	# Point your .bashrc to the host's .bashrc
+	ln -sf "$PWD/.tmux.conf" "$HOME/.tmux.conf"
+fi
+

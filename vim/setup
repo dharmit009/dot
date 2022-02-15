@@ -1,3 +1,19 @@
 #!/bin/sh 
 
+# Exit if any errors ...
+set -e 
 
+if [ -z "$(which vim)" -o -z "$(which vimtutor)" ];
+then
+	echo "Warning, Seems like you don't have Vim Install
+	properly."
+else
+	if [ -e "$HOME/.vimrc" ];
+	then 
+		mkdir -p "$HOME/dot-backup"
+		cp -rf "$HOME/.vimrc" "$HOME/dot-backup"
+	fi 
+	mkdir -p "$HOME/.vim" "$HOME/.vim/autoload"
+	ln -sf "$PWD/.vim/autoload/plug.vim" "$HOME/.vim/autoload/plug.vim"
+	ln -sf "$PWD/.vimrc" "$HOME/.vimrc"
+fi
