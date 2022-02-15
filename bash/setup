@@ -1,5 +1,8 @@
 #!/bin/sh 
 
-mkdir -p "$HOME/dot-backup"
-cp -rf "$HOME/.bashrc" "$HOME/dot-backup"
+if [ -e "$HOME/.bashrc" ];
+then 
+	mkdir -p "$HOME/dot-backup"
+	cp -rf "$HOME/.bashrc" "$HOME/dot-backup"
+fi 
 ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
