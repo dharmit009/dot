@@ -13,6 +13,4 @@ fi
 # Point your .bashrc to the host's .bashrc
 ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
 
-# Source new settings ...
-. "$HOME/.bashrc"
 
