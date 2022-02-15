@@ -5,29 +5,43 @@ let mapleader = " "
 " VIM Tweaks ...
 set clipboard=unnamedplus
 set icon 
-set noshowmode
-set nowrap
+set wrap
 set number
 set relativenumber
+set showmode
 set ttyfast
+set wildmenu
+set omnifunc=syntaxcomplete#Complete
+
+" VIM Fold Methods ...
+set foldmethod=manual
+set nofoldenable
 
 " VIM tab and space management ...
 set linebreak 
 set nosmartindent
 set nosmarttab
+set expandtab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
-set textwidth=62
+set textwidth=72
+
+" Swap and Backup Settings ...
+set nobackup
+set noswapfile
+set nowritebackup
 
 " Spell Settings ...
+set spell
 set spell spelllang=en_us
 set spellfile="~/.vim/spell/en.utf-8.add"
 
 " Highlighting settings ...
 set incsearch 
-set nohlsearch 
-set nospell
+set hlsearch 
+
+set viminfo='20,<1000,s1000
 
 "Plugin Manager ...
 call plug#begin('~/.local/share/vim/plugins')
@@ -64,7 +78,11 @@ let g:pandoc_preview_pdf_cmd = "evince"
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
-" Disabling arrow keys within vim to improve my workflow ...
+" Keyboard Remaps ...
+
+" mapping 'shift + y' to copy till end of line. 
+map Y y$
+
 " Disabling arrows in normal mode ... 
 nnoremap <up> <nop>
 nnoremap <down> <nop> 
@@ -77,7 +95,6 @@ inoremap <down> <nop>
 inoremap <left> <nop> 
 inoremap <right> <nop> 
 
-" Keyboard Remaps ...
 " Function key remaps ...
 nnoremap <F1> :PlugInstall<CR>
 nnoremap <F2> :PlugUpdate<CR>
