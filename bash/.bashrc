@@ -175,7 +175,7 @@ PROMPT_COMMAND="__ps1"
 complete -C zet zet
 
 # Exports ...
-export TERM='alacritty'
+export TERM='xterm-256color'
 export CFLAGS='-Wall -Wextra -Werror'
 export EDITOR="vim"
 export SCRIPTS="$HOME/repos/scripts"

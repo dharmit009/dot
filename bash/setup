@@ -1,0 +1,5 @@
+#!/bin/sh 
+
+mkdir -p "$HOME/dot-backup"
+cp -rf "$HOME/.bashrc" "$HOME/dot-backup"
+ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
