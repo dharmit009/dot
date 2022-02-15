@@ -1,5 +1,4 @@
 #!/bin/sh 
-
 for i in vim tmux lynx bash; do 
 	cd $i && ./setup
 	cd -
