@@ -6,3 +6,4 @@ then
 	cp -rf "$HOME/.bashrc" "$HOME/dot-backup"
 fi 
 ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
+source "$HOME/.bashrc"
