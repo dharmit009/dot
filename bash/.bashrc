@@ -171,8 +171,9 @@ __ps1() {
 
 PROMPT_COMMAND="__ps1"
 
-# zettelkasten autocompletion 
+# autocompletion 
 complete -C zet zet
+complete -C class class 
 
 # Exports ...
 export TERM='xterm-256color'

@@ -1,0 +1,11 @@
+#!/bin/sh 
+
+# Exit if any errors ...
+set -e 
+
+if [ -e "$HOME/.inputrc" ];
+then 
+  mkdir -p "$HOME/dot-backup"
+  cp -rf "$HOME/.inputrc" "$HOME/dot-backup"
+fi 
+ln -sf "$PWD/.inputrc" "$HOME/.inputrc"

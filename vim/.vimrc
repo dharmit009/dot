@@ -4,24 +4,26 @@ let mapleader = " "
 
 " VIM Tweaks ...
 set clipboard=unnamedplus
+set emoji 
 set icon 
-set wrap
 set number
+set omnifunc=syntaxcomplete#Complete
 set relativenumber
 set showmode
 set ttyfast
 set wildmenu
-set omnifunc=syntaxcomplete#Complete
+set wildmode=full
+set wrap
 
 " VIM Fold Methods ...
 set foldmethod=manual
 set nofoldenable
 
 " VIM tab and space management ...
+set expandtab
 set linebreak 
 set nosmartindent
 set nosmarttab
-set expandtab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -39,20 +41,24 @@ set spellfile="~/.vim/spell/en.utf-8.add"
 
 " Highlighting settings ...
 set incsearch 
-set hlsearch 
+set nohlsearch 
 
 set viminfo='20,<1000,s1000
 
 "Plugin Manager ...
-call plug#begin('~/.local/share/vim/plugins')
+" ONLY LOAD PLUGINS IF THE PLUGIN EXISTS ...
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+silent! if plug#begin()
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim'
 	Plug 'junegunn/vim-emoji'
+    command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
 	Plug 'morhetz/gruvbox'
 	Plug 'rwxrob/vim-pandoc-syntax-simple'
 	Plug 'vim-pandoc/vim-pandoc'
+  Plug 'tpope/vim-surround'
 call plug#end()
 
 " Plugin Settings ...
@@ -77,6 +83,9 @@ let g:pandoc#formatting#textwidth = 72
 let g:pandoc_preview_pdf_cmd = "evince"
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
+
+endif
+endif
 
 " Keyboard Remaps ...
 
@@ -110,7 +119,17 @@ nnoremap <leader>qq :q<CR>
 " QuickRun keymaps ...
 nnoremap <leader>py :!python % <CR>
 nnoremap <leader>jv :!javac % && java %:r<CR>
+nnoremap <leader>go :!go run %<CR>
 
 " Starts Limelight whenever goyo is started ...
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+augroup emoji_complete
+  autocmd!
+  autocmd FileType markdown setlocal completefunc=emoji#complete
+augroup END
+
+" VIM COLOR SETTINGS ... 
+" set relative number line color to darkyellow
+highlight LineNR ctermfg=DarkYellow
+

@@ -1,0 +1,15 @@
+# shows colors
+set colored-stats on 
+
+# tab to get all the things you can autocomplete ...  
+# (folders and file name) also ignore case
+# Which ever makes the match change it's color ...
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set colored-completion-prefix on
+
+
+# Bash keybindings ...
+# Just keeping an example if I ever need to use this ...
+"\C-h":"cd\n"
+
