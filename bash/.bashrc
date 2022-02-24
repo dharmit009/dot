@@ -222,6 +222,8 @@ alias v='vim'
 alias vi='vim'
 alias vrc="vim ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
+alias shot="flameshot gui"
+alias ping="ping -c 3"
 
 # Misc settings ...
 set -o vi 

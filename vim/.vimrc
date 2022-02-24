@@ -21,7 +21,7 @@ set nofoldenable
 
 " VIM tab and space management ...
 set expandtab
-set linebreak 
+" set linebreak 
 set nosmartindent
 set nosmarttab
 set shiftwidth=2
@@ -43,6 +43,7 @@ set spellfile="~/.vim/spell/en.utf-8.add"
 set incsearch 
 set nohlsearch 
 
+" SUPER IMPORTANT: ADDED FROM RWXROB
 set viminfo='20,<1000,s1000
 
 "Plugin Manager ...

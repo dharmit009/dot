@@ -1,5 +1,18 @@
-# shows colors
-set colored-stats on 
+# shows colors in completion if found match ...
+set colored-stats On 
+set editing-mode vi
+set keymap vi
+
+# Shows which vi-mode you are using 
+# set show-mode-in-prompt on 
+# Changes cursor according to current vi-mode
+# i.e Block for Normal or Command Mode ... 
+# &   Beam for Insert Mode ...
+# But also overrides the show-mode-in-prompt
+# as we change those strings to Block and Beam 
+# cursor style
+# set vi-ins-mode-string \1\e[6 q\2
+# set vi-cmd-mode-string \1\e[2 q\2
 
 # tab to get all the things you can autocomplete ...  
 # (folders and file name) also ignore case
@@ -12,4 +25,4 @@ set colored-completion-prefix on
 # Bash keybindings ...
 # Just keeping an example if I ever need to use this ...
 "\C-h":"cd\n"
-
+#
