@@ -2,18 +2,31 @@
 syntax on 
 let mapleader = " "
 
-" VIM Tweaks ...
+" VIM IN-BUILT COMPLETION ...
+" Chooses longest suggest by default & will even show up if there is
+" only one suggestion...Keeps the function preview window on even after
+" selecting so you could see the parameters
+set completeopt=longest,menuone,preview
+" Set Pop-Up menu height to 8
+set pumheight=8
+
+" Stuff not working properly as I Intend ...
 set clipboard=unnamedplus
 set emoji 
-set icon 
-set number
 set omnifunc=syntaxcomplete#Complete
-set relativenumber
-set showmode
-set ttyfast
+set omnifunc+=go#complete#Complete
 set wildmenu
 set wildmode=full
+
+" VIM Tweaks ...
+set icon 
+set number
+set relativenumber
+set scrolloff=998
+set showmode
+set ttyfast
 set wrap
+set autoread              " reloads the file if anything gets changed.
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -49,44 +62,40 @@ set viminfo='20,<1000,s1000
 "Plugin Manager ...
 " ONLY LOAD PLUGINS IF THE PLUGIN EXISTS ...
 if filereadable(expand("~/.vim/autoload/plug.vim"))
-silent! if plug#begin()
-	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-	Plug 'junegunn/goyo.vim'
-	Plug 'junegunn/limelight.vim'
-	Plug 'junegunn/vim-emoji'
-    command! -range EmojiReplace <line1>,<line2>s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g
-	Plug 'morhetz/gruvbox'
-	Plug 'rwxrob/vim-pandoc-syntax-simple'
-	Plug 'vim-pandoc/vim-pandoc'
-  Plug 'tpope/vim-surround'
-call plug#end()
+  silent! if plug#begin()
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'rwxrob/vim-pandoc-syntax-simple'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'tpope/vim-surround'
+  call plug#end()
 
-" Plugin Settings ...
-" Gruvbox Plugin settings (morhetz/gruvbox) ...
-let g:gruvbox_italic=1
-set background=dark
-colorscheme gruvbox
+  " Plugin Settings ...
+  " Gruvbox Plugin settings (morhetz/gruvbox) ...
+  let g:gruvbox_italic=1
+  set background=dark
+  colorscheme gruvbox
 
-" Vim Emoji Plugin Settings for (junegunn/vim-emoji) ...
-set completefunc=emoji#complete
+  " Markdown Plugin Settings for (iamcco/markdown-preview.nvim) ...
+  " let mkdp_auto_start = 1
+  let mkdp_auto_close = 1
+  let mkdp_auto_refresh = 0
+  let g:mkdp_page_title = '${name}'
+  let g:mkdp_filetypes = ['markdown']
 
-" Markdown Plugin Settings for (iamcco/markdown-preview.nvim) ...
-" let mkdp_auto_start = 1
-let mkdp_auto_close = 1
-let mkdp_auto_refresh = 0
-let g:mkdp_page_title = '${name}'
-let g:mkdp_filetypes = ['markdown']
+  " Pandoc Plugin settings ...
+  let g:pandoc#formatting#mode = 'h' 
+  let g:pandoc#formatting#textwidth = 72
+  let g:pandoc_preview_pdf_cmd = "evince"
+  let g:limelight_conceal_ctermfg = 'gray'
+  let g:limelight_conceal_ctermfg = 240
 
-" Pandoc Plugin settings ...
-let g:pandoc#formatting#mode = 'h' 
-let g:pandoc#formatting#textwidth = 72
-let g:pandoc_preview_pdf_cmd = "evince"
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-
-endif
-endif
+  endif
+endif   " GO TO LINE 53 For more details or Check the comments before Plug begin
 
 " Keyboard Remaps ...
 
@@ -125,12 +134,21 @@ nnoremap <leader>go :!go run %<CR>
 " Starts Limelight whenever goyo is started ...
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-augroup emoji_complete
-  autocmd!
-  autocmd FileType markdown setlocal completefunc=emoji#complete
-augroup END
 
 " VIM COLOR SETTINGS ... 
 " set relative number line color to darkyellow
 highlight LineNR ctermfg=DarkYellow
 
+" Omnifunc Completion ... 
+" This is an autocommand to invoke CTRL-X & CTRL-O for omnifunc
+" completion whenever '.' is pressed in a go file. 
+" Set Up omni complete for each file type
+if has("autocmd") && exists("+omnifunc")
+autocmd Filetype *
+    \	if &omnifunc == "" |
+    \		setlocal omnifunc=syntaxcomplete#Complete |
+    \	endif
+endif
+au filetype go inoremap <buffer> . .<C-x><C-o>
+
+autocmd BufWritePost *.md silent !toemo %

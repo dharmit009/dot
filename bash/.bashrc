@@ -183,7 +183,7 @@ export SCRIPTS="$HOME/repos/scripts"
 
 # Path ...
 export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin"
-export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:./:"
+export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/snippets:./:"
 export GOPATH="$HOME/go"
 
 # Colors for man pages ...
@@ -194,6 +194,9 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# USER DEFINED ENV VARAIBLES: 
+export SNIPPETS="/home/hmm/repos/dot/snippets"
 
 # Custom Aliases
 alias '?'=duck
@@ -215,7 +218,7 @@ alias ls='ls --color=auto -h --group-directories-first'
 alias more=less
 alias np='nano -w PKGBUILD'
 alias open='xdg-open'
-alias r="vim -R"
+alias r="vim -R +Goyo "
 alias rm="echo YOU ARE NOT SUPPOSE TO USE IT ..."
 alias todo="cd ~/repos/TODO"
 alias v='vim'
@@ -224,9 +227,9 @@ alias vrc="vim ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="flameshot gui"
 alias ping="ping -c 3"
+alias readings="vim /home/hmm/V0ID/personal/dad-blood-pressure-reading.md"
 
 # Misc settings ...
 set -o vi 
 set keymap vi
-unset $TMUX
 
