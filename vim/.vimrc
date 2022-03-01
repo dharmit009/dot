@@ -27,6 +27,7 @@ set showmode
 set ttyfast
 set wrap
 set autoread              " reloads the file if anything gets changed.
+set colorcolumn=70
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -118,7 +119,7 @@ inoremap <right> <nop>
 nnoremap <F1> :PlugInstall<CR>
 nnoremap <F2> :PlugUpdate<CR>
 nnoremap <F3> :PlugUpgrade<CR>
-nnoremap <F5> :so%<CR>
+nnoremap <F5> :so $HOME/.vimrc<CR>
 nnoremap <F12> :MarkdownPreviewToggle<CR>
 
 " Leader Key Remaps ...
@@ -127,9 +128,9 @@ nnoremap <leader>e  :Vexplore<CR>
 nnoremap <leader>qq :q<CR>
 
 " QuickRun keymaps ...
-nnoremap <leader>py :!python % <CR>
-nnoremap <leader>jv :!javac % && java %:r<CR>
-nnoremap <leader>go :!go run %<CR>
+nnoremap <leader>rpy :!python % <CR>
+nnoremap <leader>rja :!javac % && java %:r<CR>
+nnoremap <leader>rgo :!go run %<CR>
 
 " Starts Limelight whenever goyo is started ...
 autocmd! User GoyoEnter Limelight
@@ -138,6 +139,8 @@ autocmd! User GoyoLeave Limelight!
 " VIM COLOR SETTINGS ... 
 " set relative number line color to darkyellow
 highlight LineNR ctermfg=DarkYellow
+highlight ColorColumn ctermbg=DarkGreen
+highlight ColorColumn ctermfg=Black
 
 " Omnifunc Completion ... 
 " This is an autocommand to invoke CTRL-X & CTRL-O for omnifunc

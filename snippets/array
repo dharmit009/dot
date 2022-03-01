@@ -1,2 +1,6 @@
+echo -n 'a[] = ['
+for x in {{1}..{2}} do 
+  echo "$x, "
+done; 
+echo -n ']'
 
-a = [1,2,3,4,5,6,7,8,9,0]

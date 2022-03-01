@@ -183,7 +183,7 @@ export SCRIPTS="$HOME/repos/scripts"
 
 # Path ...
 export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin"
-export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/snippets:./:"
+export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/:./:"
 export GOPATH="$HOME/go"
 
 # Colors for man pages ...

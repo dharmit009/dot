@@ -1,0 +1,4 @@
+
+func {1} () {2} {
+  panic("Function Not Implemented")
+}
