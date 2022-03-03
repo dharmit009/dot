@@ -1,6 +1,5 @@
-echo -n 'a[] = ['
-for x in {{1}..{2}} do 
-  echo "$x, "
+printf "a[] = ["
+for x in {{1}..{2}}; do
+printf " %d," "$x"
 done; 
-echo -n ']'
-
+printf "]"
