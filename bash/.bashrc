@@ -227,9 +227,8 @@ alias vrc="vim ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="flameshot gui"
 alias ping="ping -c 3"
-alias readings="vim /home/hmm/V0ID/personal/dad-blood-pressure-reading.md"
 
 # Misc settings ...
-set -o vi 
+set -o vi
 set keymap vi
 

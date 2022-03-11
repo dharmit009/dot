@@ -21,8 +21,6 @@ set cursorline
 set emoji
 set icon
 set number
-set omnifunc+=go#complete#Complete
-set omnifunc=syntaxcomplete#Complete
 set path+=**
 set relativenumber
 set scrolloff=998
@@ -76,6 +74,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'tpope/vim-surround'
+    Plug 'vim-airline/vim-airline'
   call plug#end()
 
   " Plugin Settings ...
@@ -97,6 +96,23 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:pandoc#formatting#mode = 'h'
   let g:pandoc#formatting#textwidth = 72
   let g:pandoc_preview_pdf_cmd = "evince"
+
+  " Airline
+  let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y' ]
+      \ ]
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#show_buffers = 1
+  let g:airline_detect_spell=0
+  let g:airline_detect_spelllang=0
+  let g:airline_left_alt_sep = ''
+  let g:airline_left_sep = ''
+  let g:airline_powerline_fonts = 0
+  let g:airline_right_alt_sep = ''
+  let g:airline_right_sep = ''
 
   endif
 endif   "66 For more details or Check the comments before Plug begin
@@ -153,15 +169,6 @@ endfunction
 nnoremap <silent> n n:call HLNext(0.075)<cr>
 nnoremap <silent> N N:call HLNext(0.075)<cr>
 
-" Autocommands
-autocmd filetype * inoremap <buffer> * *<C-x><C-o>
-autocmd filetype go inoremap <buffer> . .<C-x><C-o>
-autocmd BufWritePost *.md silent !toemo %
-
-" Starts Limelight whenever goyo is started ...
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
 " Omnifunc Completion ...
 " This is an autocommand to invoke CTRL-X & CTRL-O for omnifunc
 " completion whenever '.' is pressed in a go file.
@@ -169,15 +176,27 @@ autocmd! User GoyoLeave Limelight!
 if has("autocmd") && exists("+omnifunc")
 autocmd Filetype *
     \	if &omnifunc == "" |
-    \		setlocal omnifunc=syntaxcomplete#Complete |
+    \   setlocal omnifunc+=go#complete#Complete   |
+    \   setlocal omnifunc+=py#complete#Complete   |
+    \   setlocal omnifunc+=syntaxcomplete#Complete|
     \	endif
 endif
+
+" Autocommands
+autocmd filetype ** inoremap <buffer> * *<C-x><C-o>
+autocmd filetype go inoremap <buffer> . .<C-x><C-o>
+autocmd filetype py inoremap <buffer> . .<C-x><C-o>
+autocmd BufWritePost *.md silent !toemo %
+
+" Starts Limelight whenever goyo is started ...
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " VIM COLOR SETTINGS ...
 " set relative number line color to darkyellow
 highlight LineNRAbove ctermfg=DarkGreen cterm=bold
 highlight LineNRBelow ctermfg=DarkBlue cterm=bold
-highlight LineNR ctermfg=DarkYellow
+highlight LineNR ctermfg=DarkYellow cterm=bold
 highlight ColorColumn ctermbg=DarkMagenta
 highlight Search ctermfg=DarkGreen ctermbg=Black
 
