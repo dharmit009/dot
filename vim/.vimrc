@@ -74,7 +74,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'tpope/vim-surround'
-    Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline'
   call plug#end()
 
   " Plugin Settings ...
@@ -98,21 +98,21 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:pandoc_preview_pdf_cmd = "evince"
 
   " Airline
-  let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y' ]
-      \ ]
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#left_alt_sep = ''
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#show_buffers = 1
-  let g:airline_detect_spell=0
-  let g:airline_detect_spelllang=0
-  let g:airline_left_alt_sep = ''
-  let g:airline_left_sep = ''
-  let g:airline_powerline_fonts = 0
-  let g:airline_right_alt_sep = ''
-  let g:airline_right_sep = ''
+  " let g:airline#extensions#default#layout = [
+  "     \ [ 'a', 'b', 'c' ],
+  "     \ [ 'x', 'y' ]
+  "     \ ]
+  " let g:airline#extensions#tabline#enabled = 1
+  " let g:airline#extensions#tabline#left_alt_sep = ''
+  " let g:airline#extensions#tabline#left_sep = ''
+  " let g:airline#extensions#tabline#show_buffers = 1
+  " let g:airline_detect_spell=0
+  " let g:airline_detect_spelllang=0
+  " let g:airline_left_alt_sep = ''
+  " let g:airline_left_sep = ''
+  " let g:airline_powerline_fonts = 0
+  " let g:airline_right_alt_sep = ''
+  " let g:airline_right_sep = ''
 
   endif
 endif   "66 For more details or Check the comments before Plug begin
@@ -120,6 +120,8 @@ endif   "66 For more details or Check the comments before Plug begin
 " Keyboard Remaps ...
 " mapping 'shift + y' to copy till end of line.
 map Y y$
+
+
 
 " Disabling arrows in normal mode ...
 nnoremap <up> <nop>
