@@ -16,19 +16,21 @@ set clipboard=unnamedplus
 
 " VIM Tweaks ...
 " set cursorcolumn
+set path+=**
 set autoread              " reloads the file if anything gets changed.
 set cursorline
 set emoji
 set icon
 set number
-set path+=**
 set relativenumber
 set scrolloff=998
 set ttyfast
 set wildmenu
 set wildmode=full
-set wrap
+set nowrap
 set noshowmode
+set signcolumn=yes
+set hidden
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -38,17 +40,19 @@ set nofoldenable
 set expandtab
 
 " set linebreak
-set nosmartindent
+set smartindent
 set nosmarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set textwidth=72
 
 " Swap and Backup Settings ...
 set nobackup
 set noswapfile
 set nowritebackup
+set undodir=~/.vim/undodir
+set undofile
 
 " Spell Settings ...
 set spell
@@ -74,6 +78,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'tpope/vim-surround'
+    Plug 'frazrepo/vim-rainbow'
+    Plug 'fladson/vim-kitty'
     " Plug 'vim-airline/vim-airline'
   call plug#end()
 
@@ -117,11 +123,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   endif
 endif   "66 For more details or Check the comments before Plug begin
 
+" vim rainbow ...
+let g:rainbow_active = 1
+
 " Keyboard Remaps ...
 " mapping 'shift + y' to copy till end of line.
 map Y y$
-
-
 
 " Disabling arrows in normal mode ...
 nnoremap <up> <nop>
@@ -135,10 +142,12 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-" Function key remaps ...
-nnoremap <F1> :PlugInstall<CR>
-nnoremap <F2> :PlugUpdate<CR>
-nnoremap <F3> :PlugUpgrade<CR>
+" Function keys remaps ...
+nnoremap <F1> :PlugUpgrade<CR>
+nnoremap <F2> :PlugClean<CR>
+nnoremap <F3> :PlugInstall<CR>
+nnoremap <F4> :PlugUpdate<CR>
+
 nnoremap <F5> :so $HOME/.vimrc<CR>
 nnoremap <F12> :MarkdownPreviewToggle<CR>
 
@@ -193,6 +202,21 @@ autocmd BufWritePost *.md silent !toemo %
 " Starts Limelight whenever goyo is started ...
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+" Autocommand to trim white spaces ...
+fun! TrimWhiteSpace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+" Creating auto group named as damns which will call the function all my
+" user defined functions and remove legacy functions which are running
+" in bg.
+augroup DAMNS
+    autocmd!
+    autocmd BufWritePre * :call TrimWhiteSpace()
+augroup end
 
 " VIM COLOR SETTINGS ...
 " set relative number line color to darkyellow

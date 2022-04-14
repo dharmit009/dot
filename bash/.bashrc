@@ -120,14 +120,14 @@ ex ()
   fi
 }
 
-# PS1 Config ... 
+# PS1 Config ...
 
 PROMPT_LONG=20
 PROMPT_MAX=95
 PROMPT_AT=@
 
 function set_virtualenv(){
-	if test -z "$VIRTUAL_ENV" ; then 
+	if test -z "$VIRTUAL_ENV" ; then
 	    PYTHON_VIRTUALENV=""
 	else
 	    PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
@@ -153,14 +153,14 @@ __ps1() {
   [[ -n "$B" ]] && B="$u($b$B$u)"
 
   # short="$r[$u\u$g$r$PROMPT_AT$h\h$g$p: $w$dir$r]$B$p$P$x$u[$r r $g g $h h $u u $p p $w w $b b $x x] "
-  # r -> red. 
-  # g -> grey. 
-  # h -> blue1. 
-  # u -> orange. 
-  # p -> blue2. 
-  # w -> purple. 
-  # b -> green. 
-  # x -> white with yellowish tint.  
+  # r -> red.
+  # g -> grey.
+  # h -> blue1.
+  # u -> orange.
+  # p -> blue2.
+  # w -> purple.
+  # b -> green.
+  # x -> white with yellowish tint.
 
   set_virtualenv
 
@@ -171,9 +171,9 @@ __ps1() {
 
 PROMPT_COMMAND="__ps1"
 
-# autocompletion 
+# autocompletion
 complete -C zet zet
-complete -C class class 
+complete -C class class
 
 # Exports ...
 export TERM='xterm-256color'
@@ -195,15 +195,15 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# USER DEFINED ENV VARAIBLES: 
-export SNIPPETS="/home/hmm/repos/dot/snippets"
+# USER DEFINED ENV VARAIBLES:
+export SNIPS="/home/hmm/repos/dot/snippets"
 
 # Custom Aliases
 alias '?'=duck
 alias '??'=google
 alias '???'=bing
-alias brc="vim ~/.bashrc"
-alias alac="vim ~/.config/alacritty/alacritty.yml"
+alias brc="$EDITOR ~/.bashrc"
+alias alac="$EDITOR ~/.config/alacritty/alacritty.yml"
 alias c="clear"
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
@@ -214,19 +214,18 @@ alias fgrep='fgrep --colour=auto'
 alias fishes='asciiquarium'
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --colour=auto'
-alias ls='ls --color=auto -h --group-directories-first'  
+alias ls='ls --color=auto -h --group-directories-first'
 alias more=less
 alias np='nano -w PKGBUILD'
 alias open='xdg-open'
-alias r="vim -R +Goyo "
+alias r="$EDITOR -R +Goyo "
 alias rm="echo YOU ARE NOT SUPPOSE TO USE IT ..."
 alias todo="cd ~/repos/TODO"
-alias v='vim'
-alias vi='vim'
-alias vrc="vim ~/.vimrc"
+alias vrc="$EDITOR ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="flameshot gui"
 alias ping="ping -c 3"
+alias snipp="cd $SNIPS"
 
 # Misc settings ...
 set -o vi

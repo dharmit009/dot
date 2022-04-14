@@ -1,0 +1,8 @@
+from tkinter import *
+
+master = Tk();
+
+
+master.title("TITLE");
+master.geometry("500x200");
+master.mainloop();

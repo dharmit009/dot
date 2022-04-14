@@ -1,0 +1,5 @@
+i = 0;
+while{
+  // your statements...
+  i = i + 1;
+}
