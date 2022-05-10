@@ -1,7 +1,7 @@
-#!/bin/sh 
+#!/bin/sh
 
 # Exit if any errors ...
-set -e 
+set -e
 
 if [ -z "$(which vim)" -o -z "$(which vimtutor)" ];
 then
@@ -9,10 +9,10 @@ then
 	properly."
 else
 	if [ -e "$HOME/.vimrc" ];
-	then 
+	then
 		mkdir -p "$HOME/dot-backup"
 		cp -rf "$HOME/.vimrc" "$HOME/dot-backup"
-	fi 
+	fi
 	mkdir -p "$HOME/.vim" "$HOME/.vim/autoload"
 	ln -sf "$PWD/.vim/autoload/plug.vim" "$HOME/.vim/autoload/plug.vim"
 	ln -sf "$PWD/.vimrc" "$HOME/.vimrc"

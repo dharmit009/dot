@@ -1,5 +1,5 @@
-#!/bin/sh 
-for i in vim tmux lynx bash inputrc; do 
+#!/bin/sh
+for i in vim tmux lynx bash inputrc alacritty; do
 	cd $i && ./setup
 	cd -
 done

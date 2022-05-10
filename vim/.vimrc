@@ -1,15 +1,15 @@
 " General Settings ...
 syntax enable
-let mapleader = " "
+let mapleader=" "
 
 " VIM IN-BUILT COMPLETION ...
 " Chooses longest suggest by default & will even show up if there is
 " only one suggestion...Keeps the function preview window on even after
 " selecting so you could see the parameters
-set completeopt=longest,menuone,preview
+" set completeopt=longest
 
 " Set Pop-Up menu height to 8
-set pumheight=8
+set pumheight=100
 
 " Stuff not working properly as I Intend ...
 set clipboard=unnamedplus
@@ -25,8 +25,9 @@ set number
 set relativenumber
 set scrolloff=998
 set ttyfast
-set wildmenu
-set wildmode=full
+set noruler
+" set wildmenu
+" set wildmode=full
 set nowrap
 set noshowmode
 set signcolumn=yes
@@ -55,6 +56,7 @@ set undodir=~/.vim/undodir
 set undofile
 
 " Spell Settings ...
+set encoding=utf-8
 set spell
 set spell spelllang=en_us
 set spellfile="~/.vim/spell/en.utf-8.add"
@@ -69,21 +71,24 @@ set viminfo='20,<1000,s1000
 " ONLY LOAD PLUGINS IF THE PLUGIN EXISTS ...
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   silent! if plug#begin()
+    Plug 'dhruvasagar/vim-table-mode'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'fladson/vim-kitty'
+    Plug 'frazrepo/vim-rainbow'
     Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'morhetz/gruvbox'
-    Plug 'rwxrob/vim-pandoc-syntax-simple'
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'frazrepo/vim-rainbow'
-    Plug 'fladson/vim-kitty'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'rwxrob/vim-pandoc-syntax-simple'
     " Plug 'vim-airline/vim-airline'
+    " Plug 'mrk21/yaml-vim'
   call plug#end()
 
   " Plugin Settings ...
+
   " Gruvbox Plugin settings (morhetz/gruvbox) ...
   colorscheme gruvbox
   let g:gruvbox_italic=1
@@ -148,7 +153,8 @@ nnoremap <F2> :PlugClean<CR>
 nnoremap <F3> :PlugInstall<CR>
 nnoremap <F4> :PlugUpdate<CR>
 
-nnoremap <F5> :so $HOME/.vimrc<CR>
+nnoremap <F5>  :so $HOME/.vimrc<CR>
+nnoremap <F10> :set relativenumber! number! showmode! showcmd! hidden! signcolumn=no<CR>
 nnoremap <F12> :MarkdownPreviewToggle<CR>
 
 " Leader Key Remaps ...
@@ -160,6 +166,28 @@ nnoremap <leader>qq :q<CR>
 nnoremap <leader>rpy :!python % <CR>
 nnoremap <leader>rja :!javac % && java %:r<CR>
 nnoremap <leader>rgo :!go run %<CR>
+
+" Presentation Settings ...
+" nnoremap <F10> :set relativenumber! number! showmode! showcmd! hidden! signcolumn=no<CR>
+
+" Sliding effect using buffers ...
+
+" ascii art font ...
+nmap <leader>d :.!toilet -w 300 <CR>
+nmap <leader>D :.!toilet -w 300 -f small<CR>
+
+" ascii box border ...
+nmap <leader>1 :.!toilet -w 300 -f term -F border<CR>
+
+" .vpm --> vim presentation mode ...
+autocmd BufNewFile,BufRead *.vpm call SetVimPresentationMode()
+function SetVimPresentationMode()
+    nnoremap <Left> :silent bp<CR> :redraw!<CR>
+    nnoremap <Right> :silent bn<CR> :redraw!<CR>
+endfunction
+
+
+
 
 " VIM FUNCTIONS ...
 " Orielly Conf hlsearch blinking function ...
@@ -233,3 +261,4 @@ match OverLength /\%>72v.\+/
 highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkBlue
 match ExtraWhitespace /\s\+$/
 
+hi Normal guibg=NONE ctermbg=NONE

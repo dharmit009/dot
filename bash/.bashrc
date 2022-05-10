@@ -179,10 +179,10 @@ complete -C class class
 export TERM='xterm-256color'
 export CFLAGS='-Wall -Wextra -Werror'
 export EDITOR="vim"
-export SCRIPTS="$HOME/repos/scripts"
 
 # Path ...
-export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin"
+export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin:"
+export PATH="$PATH:$GOBIN"
 export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/:./:"
 export GOPATH="$HOME/go"
 
@@ -196,7 +196,10 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # USER DEFINED ENV VARAIBLES:
-export SNIPS="/home/hmm/repos/dot/snippets"
+export SNIPS="$HOME/repos/dot/snippets"
+export SCRIPTS="$HOME/repos/scripts/"
+export REPOS="$HOME/repos/"
+export GOBIN="$HOME/go/bin"
 
 # Custom Aliases
 alias '?'=duck
@@ -204,7 +207,8 @@ alias '??'=google
 alias '???'=bing
 alias brc="$EDITOR ~/.bashrc"
 alias alac="$EDITOR ~/.config/alacritty/alacritty.yml"
-alias c="clear"
+alias clear="clear && colorscript -r"
+alias c="\clear"
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias doom='emacs'
@@ -215,7 +219,7 @@ alias fishes='asciiquarium'
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --colour=auto'
 alias ls='ls --color=auto -h --group-directories-first'
-alias more=less
+alias more="less"
 alias np='nano -w PKGBUILD'
 alias open='xdg-open'
 alias r="$EDITOR -R +Goyo "
@@ -223,11 +227,13 @@ alias rm="echo YOU ARE NOT SUPPOSE TO USE IT ..."
 alias todo="cd ~/repos/TODO"
 alias vrc="$EDITOR ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
-alias shot="flameshot gui"
+alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
-alias snipp="cd $SNIPS"
+
+# Importing Personal Bashrc
+source "$HOME/.bashrc-personal"
 
 # Misc settings ...
 set -o vi
 set keymap vi
-
+colorscript -r
