@@ -174,6 +174,7 @@ PROMPT_COMMAND="__ps1"
 # autocompletion
 complete -C zet zet
 complete -C class class
+complete -C pomo pomo
 
 # Exports ...
 export TERM='xterm-256color'
@@ -207,8 +208,7 @@ alias '??'=google
 alias '???'=bing
 alias brc="$EDITOR ~/.bashrc"
 alias alac="$EDITOR ~/.config/alacritty/alacritty.yml"
-alias clear="clear && colorscript -r"
-alias c="\clear"
+alias c="clear"
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias doom='emacs'
@@ -236,4 +236,3 @@ source "$HOME/.bashrc-personal"
 # Misc settings ...
 set -o vi
 set keymap vi
-colorscript -r
