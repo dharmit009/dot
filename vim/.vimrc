@@ -12,10 +12,10 @@ let mapleader=" "
 set pumheight=100
 
 " Stuff not working properly as I Intend ...
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " VIM Tweaks ...
-" set cursorcolumn
+set cursorcolumn
 set path+=**
 set autoread              " reloads the file if anything gets changed.
 set cursorline
@@ -32,6 +32,7 @@ set nowrap
 set noshowmode
 set signcolumn=yes
 set hidden
+set mousemodel=popup
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -73,9 +74,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   silent! if plug#begin()
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-    Plug 'fladson/vim-kitty'
     Plug 'frazrepo/vim-rainbow'
-    Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'morhetz/gruvbox'
@@ -83,6 +83,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-surround'
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'rwxrob/vim-pandoc-syntax-simple'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc-tabnine'
     " Plug 'vim-airline/vim-airline'
     " Plug 'mrk21/yaml-vim'
   call plug#end()
@@ -90,9 +92,16 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   " Plugin Settings ...
 
   " Gruvbox Plugin settings (morhetz/gruvbox) ...
-  colorscheme gruvbox
-  let g:gruvbox_italic=1
+  let g:gruvbox_italic='1'
+  let g:gruvbox_bold='1'
+  let g:gruvbox_underline='1'
+  let g:gruvbox_undercurl='1'
+  let g:gruvbox_contrast_dark="medium"
+  let g:gruvbox_termcolors='256'
+  " let g:gruvbox_improved_strings=1
+  let g:gruvbox_improved_warnings='1'
   set background=dark
+  colorscheme gruvbox
 
   " Markdown Plugin Settings for (iamcco/markdown-preview.nvim) ...
   " let mkdp_auto_start = 1
@@ -131,6 +140,10 @@ endif   "66 For more details or Check the comments before Plug begin
 " vim rainbow ...
 let g:rainbow_active = 1
 
+" Prettier
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
 " Keyboard Remaps ...
 " mapping 'shift + y' to copy till end of line.
 map Y y$
@@ -154,6 +167,7 @@ nnoremap <F3> :PlugInstall<CR>
 nnoremap <F4> :PlugUpdate<CR>
 
 nnoremap <F5>  :so $HOME/.vimrc<CR>
+nnoremap <F6> :set nospell <CR>
 nnoremap <F10> :set relativenumber! number! showmode! showcmd! hidden! signcolumn=no<CR>
 nnoremap <F12> :MarkdownPreviewToggle<CR>
 
@@ -166,6 +180,7 @@ nnoremap <leader>qq :q<CR>
 nnoremap <leader>rpy :!python % <CR>
 nnoremap <leader>rja :!javac % && java %:r<CR>
 nnoremap <leader>rgo :!go run %<CR>
+nnoremap <leader>rsh :!bash %<CR>
 
 " Presentation Settings ...
 " nnoremap <F10> :set relativenumber! number! showmode! showcmd! hidden! signcolumn=no<CR>
@@ -180,14 +195,11 @@ nmap <leader>D :.!toilet -w 300 -f small<CR>
 nmap <leader>1 :.!toilet -w 300 -f term -F border<CR>
 
 " .vpm --> vim presentation mode ...
-autocmd BufNewFile,BufRead *.vpm call SetVimPresentationMode()
-function SetVimPresentationMode()
-    nnoremap <Left> :silent bp<CR> :redraw!<CR>
-    nnoremap <Right> :silent bn<CR> :redraw!<CR>
-endfunction
-
-
-
+" autocmd BufNewFile,BufRead *.vpm call SetVimPresentationMode()
+" function SetVimPresentationMode()
+"     nnoremap <Left> :silent bp<CR> :redraw!<CR>
+"     nnoremap <Right> :silent bn<CR> :redraw!<CR>
+" endfunction
 
 " VIM FUNCTIONS ...
 " Orielly Conf hlsearch blinking function ...
@@ -211,18 +223,18 @@ nnoremap <silent> N N:call HLNext(0.075)<cr>
 " Omnifunc Completion ...
 " This is an autocommand to invoke CTRL-X & CTRL-O for omnifunc
 " completion whenever '.' is pressed in a go file.
-" Set Up omni complete for each file type
-if has("autocmd") && exists("+omnifunc")
-autocmd Filetype *
-    \	if &omnifunc == "" |
-    \   setlocal omnifunc+=go#complete#Complete   |
-    \   setlocal omnifunc+=py#complete#Complete   |
-    \   setlocal omnifunc+=syntaxcomplete#Complete|
-    \	endif
-endif
-
+"" Set Up omni complete for each file type
+"if has("autocmd") && exists("+omnifunc")
+"autocmd Filetype *
+"    \	if &omnifunc == "" |
+"    \   setlocal omnifunc+=go#complete#Complete   |
+"    \   setlocal omnifunc+=py#complete#Complete   |
+"    \   setlocal omnifunc+=syntaxcomplete#Complete|
+"    \	endif
+"endif
+"
 " Autocommands
-autocmd filetype ** inoremap <buffer> * *<C-x><C-o>
+" autocmd filetype ** inoremap <buffer> * *<C-x><C-o>
 autocmd filetype go inoremap <buffer> . .<C-x><C-o>
 autocmd filetype py inoremap <buffer> . .<C-x><C-o>
 autocmd BufWritePost *.md silent !toemo %
@@ -232,6 +244,7 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " Autocommand to trim white spaces ...
+" This is the function to remove extra spaces ...
 fun! TrimWhiteSpace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -248,17 +261,37 @@ augroup end
 
 " VIM COLOR SETTINGS ...
 " set relative number line color to darkyellow
-highlight LineNRAbove ctermfg=DarkGreen cterm=bold
+highlight LineNRAbove ctermfg=DarkMagenta cterm=bold
 highlight LineNRBelow ctermfg=DarkBlue cterm=bold
 highlight LineNR ctermfg=DarkYellow cterm=bold
 highlight ColorColumn ctermbg=DarkMagenta
 highlight Search ctermfg=DarkGreen ctermbg=Black
+highlight link pythonFunction GruvboxDarkRedBold
 
 " Highlighting with matches ...
 " Show the content in red whenever I exceed 72 characters.
 highlight OverLength ctermbg=DarkRed ctermfg=white guibg=#FFD9D9
 match OverLength /\%>72v.\+/
 highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkBlue
+highlight ExtraWhitespace ctermbg=DarkGreen guibg=DarkBlue
 match ExtraWhitespace /\s\+$/
 
 hi Normal guibg=NONE ctermbg=NONE
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[3 q"
+let &t_EI = "\e[1 q"
+
+" testing go completion
+let g:completor_filetype_map = {}
+let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"

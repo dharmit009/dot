@@ -1,0 +1,4 @@
+elif [ "$1" == "YOUR KEYWORD" ];
+then
+	url="YOUR URL";
+

@@ -1,0 +1,4 @@
+
+name="$1"
+
+echo "${name:-'Please provide an argument'}"

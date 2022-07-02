@@ -1,0 +1,68 @@
+" General Settings ...
+syntax on
+let mapleader=" "
+
+" Settings ...
+set exrc
+set guicursor=
+set nohlsearch
+set hidden
+set noerrorbells
+set number
+set relativenumber
+set nowrap
+set smartcase
+set ignorecase
+set noswapfile
+set nobackup
+set hidden
+set undodir=~/.vim/undodir
+set clipboard=unnamedplus
+set undofile
+set incsearch
+" set termguicolors
+set scrolloff=100
+set noshowmode
+set completeopt=menuone,noinsert,noselect
+set colorcolumn=80
+set signcolumn=yes
+set cmdheight=2
+set updatetime=50
+set shortmess+=c
+
+" Tab Settings ... 
+
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+
+"Plugin Manager ...
+" ONLY LOAD PLUGINS IF THE PLUGIN EXISTS ...
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+  silent! if plug#begin()
+    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'frazrepo/vim-rainbow'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'rwxrob/vim-pandoc-syntax-simple'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc-tabnine'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'mrk21/yaml-vim'
+    call plug#end()
+  endif
+
+    " Plugin Settings ...
+    " Gruvbox Plugin settings (morhetz/gruvbox) ...
+    colorscheme gruvbox
+    let g:gruvbox_italic=1
+    set background=dark
+
+endif

@@ -1,5 +1,5 @@
 # ~/.bashrc
-#
+
 [[ $- != *i* ]] && return
 
 colors() {
@@ -105,7 +105,7 @@ ex ()
       *.tar.bz2)   tar xjf $1   ;;
       *.tar.gz)    tar xzf $1   ;;
       *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
+      *.rar)       unrar x $1   ;;
       *.gz)        gunzip $1    ;;
       *.tar)       tar xf $1    ;;
       *.tbz2)      tar xjf $1   ;;
@@ -180,6 +180,8 @@ complete -C pomo pomo
 export TERM='xterm-256color'
 export CFLAGS='-Wall -Wextra -Werror'
 export EDITOR="vim"
+export LANG=en_IN.UTF-8
+export LC_ALL=en_IN.UTF-8
 
 # Path ...
 export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin:"
@@ -231,7 +233,10 @@ alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
 
 # Importing Personal Bashrc
-source "$HOME/.bashrc-personal"
+if [ -z "$HOME/.bashrc-personal" ];
+then
+    source "$HOME/.bashrc-personal"
+fi
 
 # Misc settings ...
 set -o vi
