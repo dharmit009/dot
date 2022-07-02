@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Exit if any errors ...
+set -e
+
+if [ -z "$(which kitty)" ];
+then
+	echo "Warning, Seems like you don't have kitty installed on the
+    system."
+else
+	if [ -e "$HOME/.config/kitty/kitty.conf" ];
+	then
+		mkdir -p "$HOME/dot-backup/kitty"
+		cp -rf "$HOME/.config/kitty/kitty.conf" "$HOME/dot-backup/kitty/"
+	fi
+	ln -sf "$PWD/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+fi
