@@ -1,0 +1,12 @@
+bold   = "\033[1m"
+normal = "\033[0m"
+
+"""{bold}NAME {normal}
+    {toolName} - a tool to do something"
+
+{bold}SYNOPSIS {normal}
+    {bold}Tool/script usage ...{normal}
+
+{bold}DESCRIPTION {normal}
+    A short description about your script or tool.
+"""

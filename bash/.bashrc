@@ -179,14 +179,14 @@ complete -C pomo pomo
 # Exports ...
 export TERM='xterm-256color'
 export CFLAGS='-Wall -Wextra -Werror'
-export EDITOR="vim"
+export EDITOR="nvim"
 export LANG=en_IN.UTF-8
 export LC_ALL=en_IN.UTF-8
 
 # Path ...
 export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin:"
-export PATH="$PATH:$GOBIN"
-export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/:./:"
+export PATH="$PATH:$GOBIN:/home/hmm009/.cargo/bin"
+export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/:./:~/subjects:"
 export GOPATH="$HOME/go"
 
 # Colors for man pages ...
@@ -197,6 +197,7 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 
 # USER DEFINED ENV VARAIBLES:
 export SNIPS="$HOME/repos/dot/snippets"
@@ -231,13 +232,25 @@ alias vrc="$EDITOR ~/.vimrc"
 alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
+alias vm="virtualboxvm --seamless --startvm"
 
 # Importing Personal Bashrc
-if [ -z "$HOME/.bashrc-personal" ];
+if [[ -z "$HOME/.bashrc-personal" ]];
 then
     source "$HOME/.bashrc-personal"
+fi
+
+if [[ -z "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh" ]];
+then
+    source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 fi
 
 # Misc settings ...
 set -o vi
 set keymap vi
+
+PATH="/home/hmm009/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/hmm009/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/hmm009/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/hmm009/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;

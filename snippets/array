@@ -1,5 +1,5 @@
 printf "a[] = ["
-for x in {{1}..{2}}; do
+for x in {{$1}..{$2}}; do
 printf " %d," "$x"
 done;
 printf "]"

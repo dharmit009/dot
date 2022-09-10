@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# Exit if any errors ...
+set -e
+
+if [ -z "$(which vim)" -o -z "$(which vimtutor)" ];
+then
+	echo "Warning, Seems like you don't have Vim Install
+	properly."
+else
+	if [ -e "/etc/X11/xorg.conf.d/10-monitor.conf" ];
+	then
+		mkdir -p "/etc/X11/xorg.conf.d/"
+		cp -rf "./10-monitor.conf" "/etc/X11/xorg.conf.d/10-monitor.conf"
+	fi
+fi

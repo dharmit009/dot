@@ -1,12 +1,17 @@
-" General Settings ...
-syntax enable
+" Settings ...
+syntax on
+filetype plugin on
 let mapleader=" "
+
+if has("eval")                               " vim-tiny lacks 'eval'
+  let skip_defaults_vim = 1
+endif
 
 " VIM IN-BUILT COMPLETION ...
 " Chooses longest suggest by default & will even show up if there is
 " only one suggestion...Keeps the function preview window on even after
 " selecting so you could see the parameters
-" set completeopt=longest
+set completeopt=menuone,noinsert,noselect
 
 " Set Pop-Up menu height to 8
 set pumheight=100
@@ -15,7 +20,11 @@ set pumheight=100
 set clipboard+=unnamedplus
 
 " VIM Tweaks ...
+set nocompatible
+set exrc
 set cursorcolumn
+" provides tab-completion for all file related tasks
+" ** means search through dir and every sub dir
 set path+=**
 set autoread              " reloads the file if anything gets changed.
 set cursorline
@@ -25,14 +34,17 @@ set number
 set relativenumber
 set scrolloff=998
 set ttyfast
-set noruler
-" set wildmenu
-" set wildmode=full
+set ruler
+set wildmenu
+set wildmode=full
 set nowrap
-set noshowmode
+" set colorcolumn=80
 set signcolumn=yes
 set hidden
 set mousemodel=popup
+set noerrorbells
+set cinoptions+=0
+set conceallevel=1
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -40,14 +52,16 @@ set nofoldenable
 
 " VIM tab and space management ...
 set expandtab
-
-" set linebreak
+set linebreak
 set smartindent
-set nosmarttab
+set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-set textwidth=72
+set textwidth=62
+set formatexpr=gq
+set autoindent
+set wrapscan
 
 " Swap and Backup Settings ...
 set nobackup
@@ -55,6 +69,7 @@ set noswapfile
 set nowritebackup
 set undodir=~/.vim/undodir
 set undofile
+set noshowmode
 
 " Spell Settings ...
 set encoding=utf-8
@@ -65,8 +80,13 @@ set spellfile="~/.vim/spell/en.utf-8.add"
 " Highlighting settings ...
 set incsearch
 
-" SUPER IMPORTANT: ADDED FROM RWXROB
+" hides those nasty tildes which no one likes
+" & dont remove that whitespace below it is required.
+set fillchars=eob:\ 
+
+" SUPER IMPORTANT: ADDED FROM RWXROB Don't know what it is ...
 set viminfo='20,<1000,s1000
+set listchars=space:*,trail:*,nbsp:*,extends:>,precedes:<,tab:\|>
 
 "Plugin Manager ...
 " ONLY LOAD PLUGINS IF THE PLUGIN EXISTS ...
@@ -75,23 +95,22 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'frazrepo/vim-rainbow'
+    Plug 'gruvbox-community/gruvbox'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
-    Plug 'morhetz/gruvbox'
+    Plug 'neoclide/coc-tabnine'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'rwxrob/vim-pandoc-syntax-simple'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'rwxrob/vim-pandoc-syntax-simple'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'neoclide/coc-tabnine'
     " Plug 'vim-airline/vim-airline'
-    " Plug 'mrk21/yaml-vim'
+    Plug 'vim-pandoc/vim-pandoc'
   call plug#end()
 
   " Plugin Settings ...
 
-  " Gruvbox Plugin settings (morhetz/gruvbox) ...
+  " Gruvbox Plugin settings (gruvbox) ...
   let g:gruvbox_italic='1'
   let g:gruvbox_bold='1'
   let g:gruvbox_underline='1'
@@ -99,7 +118,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:gruvbox_contrast_dark="medium"
   let g:gruvbox_termcolors='256'
   " let g:gruvbox_improved_strings=1
-  let g:gruvbox_improved_warnings='1'
+  " let g:gruvbox_improved_warnings='1'
   set background=dark
   colorscheme gruvbox
 
@@ -111,28 +130,50 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let mkdp_auto_refresh = 0
 
   " Pandoc Plugin settings ...
-  let g:limelight_conceal_ctermfg = 'gray'
-  let g:limelight_conceal_ctermfg = 240
-  let g:pandoc#formatting#mode = 'h'
-  let g:pandoc#formatting#textwidth = 72
-  let g:pandoc_preview_pdf_cmd = "evince"
+  " let g:limelight_conceal_ctermfg = 'gray'
+  " let g:limelight_conceal_ctermfg = 240
+  " let g:pandoc#formatting#mode = 'h'
+  " let g:pandoc#formatting#textwidth = 72
+  " let g:pandoc_preview_pdf_cmd = "evince"
 
-  " Airline
-  " let g:airline#extensions#default#layout = [
-  "     \ [ 'a', 'b', 'c' ],
-  "     \ [ 'x', 'y' ]
-  "     \ ]
-  " let g:airline#extensions#tabline#enabled = 1
-  " let g:airline#extensions#tabline#left_alt_sep = ''
-  " let g:airline#extensions#tabline#left_sep = ''
-  " let g:airline#extensions#tabline#show_buffers = 1
-  " let g:airline_detect_spell=0
-  " let g:airline_detect_spelllang=0
-  " let g:airline_left_alt_sep = ''
-  " let g:airline_left_sep = ''
-  " let g:airline_powerline_fonts = 0
-  " let g:airline_right_alt_sep = ''
-  " let g:airline_right_sep = ''
+  " Airline settings ...
+   " let g:airline#extensions#default#layout = [
+   "     \ [ 'a', 'b', 'c' ],
+   "     \ [ 'x', 'y' ]
+   "     \ ]
+   " let g:airline#extensions#tabline#enabled = 1
+   " " let g:airline#extensions#tabline#left_alt_sep = ''
+   " " let g:airline#extensions#tabline#left_sep = ''
+   " let g:airline#extensions#tabline#show_buffers = 1
+   " let g:airline_detect_spell=0
+   " let g:airline_detect_spelllang=0
+   " " let g:airline_left_alt_sep = ''
+   " " let g:airline_left_sep = ''
+   " " let g:airline_powerline_fonts = 1
+   " " let g:airline_right_alt_sep = ''
+   " " let g:airline_right_sep = ''
+   " let g:airline_mode_map = {
+   "    \ 'c'      : 'C',
+   "    \ 'i'      : 'I',
+   "    \ 'ic'     : 'I',
+   "    \ 'ix'     : 'I',
+   "    \ 'n'      : 'N',
+   "    \ 'multi'  : 'M',
+   "    \ 'ni'     : 'N',
+   "    \ 'no'     : 'N',
+   "    \ 'R'      : 'R',
+   "    \ 'Rv'     : 'R',
+   "    \ 's'      : 'S',
+   "    \ 'S'      : 'S',
+   "    \ 't'      : 'T',
+   "    \ 'v'      : 'V',
+   "    \ 'V'      : 'V',
+   "    \ }
+
+  let g:netrw_banner=0
+  let g:netrw_browse_split=4
+  let g:netrw_altv=1
+  let g:netrw_liststyle=3
 
   endif
 endif   "66 For more details or Check the comments before Plug begin
@@ -159,15 +200,16 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+inoremap <C-BS> <C-W>
 
 " Function keys remaps ...
 nnoremap <F1> :PlugUpgrade<CR>
 nnoremap <F2> :PlugClean<CR>
 nnoremap <F3> :PlugInstall<CR>
 nnoremap <F4> :PlugUpdate<CR>
-
-nnoremap <F5>  :so $HOME/.vimrc<CR>
+nnoremap <F5> :so $HOME/.vimrc<CR>
 nnoremap <F6> :set nospell <CR>
+
 nnoremap <F10> :set relativenumber! number! showmode! showcmd! hidden! signcolumn=no<CR>
 nnoremap <F12> :MarkdownPreviewToggle<CR>
 
@@ -220,24 +262,11 @@ endfunction
 nnoremap <silent> n n:call HLNext(0.075)<cr>
 nnoremap <silent> N N:call HLNext(0.075)<cr>
 
-" Omnifunc Completion ...
-" This is an autocommand to invoke CTRL-X & CTRL-O for omnifunc
-" completion whenever '.' is pressed in a go file.
-"" Set Up omni complete for each file type
-"if has("autocmd") && exists("+omnifunc")
-"autocmd Filetype *
-"    \	if &omnifunc == "" |
-"    \   setlocal omnifunc+=go#complete#Complete   |
-"    \   setlocal omnifunc+=py#complete#Complete   |
-"    \   setlocal omnifunc+=syntaxcomplete#Complete|
-"    \	endif
-"endif
-"
 " Autocommands
 " autocmd filetype ** inoremap <buffer> * *<C-x><C-o>
 autocmd filetype go inoremap <buffer> . .<C-x><C-o>
 autocmd filetype py inoremap <buffer> . .<C-x><C-o>
-autocmd BufWritePost *.md silent !toemo %
+" autocmd BufWritePost *.md silent !toemo %
 
 " Starts Limelight whenever goyo is started ...
 autocmd! User GoyoEnter Limelight
@@ -251,12 +280,23 @@ fun! TrimWhiteSpace()
     call winrestview(l:save)
 endfun
 
+
+fun! ToEmo()
+    let l:save = winsaveview()
+    silent !toemo %
+    call winrestview(l:save)
+endfun
+
 " Creating auto group named as damns which will call the function all my
 " user defined functions and remove legacy functions which are running
 " in bg.
 augroup DAMNS
     autocmd!
-    autocmd BufWritePre * :call TrimWhiteSpace()
+    autocmd BufWritePost * silent !toemo %
+    autocmd BufWritePre *.go :call TrimWhiteSpace()
+    autocmd BufWritePre *.py :call TrimWhiteSpace()
+    autocmd BufWritePre *.md :call TrimWhiteSpace()
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup end
 
 " VIM COLOR SETTINGS ...
@@ -270,10 +310,9 @@ highlight link pythonFunction GruvboxDarkRedBold
 
 " Highlighting with matches ...
 " Show the content in red whenever I exceed 72 characters.
-highlight OverLength ctermbg=DarkRed ctermfg=white guibg=#FFD9D9
+highlight OverLength ctermbg=LightGreen ctermfg=white guibg=#FFD9D9
 match OverLength /\%>72v.\+/
-highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkBlue
-highlight ExtraWhitespace ctermbg=DarkGreen guibg=DarkBlue
+highlight ExtraWhitespace ctermbg=LightBlue guibg=DarkRed
 match ExtraWhitespace /\s\+$/
 
 hi Normal guibg=NONE ctermbg=NONE
@@ -293,5 +332,37 @@ let &t_SR = "\e[3 q"
 let &t_EI = "\e[1 q"
 
 " testing go completion
-let g:completor_filetype_map = {}
-let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"
+" let g:completor_filetype_map = {}
+" let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"
+
+" COC COMPELETION
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+" autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc

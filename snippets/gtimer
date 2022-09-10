@@ -1,9 +1,9 @@
 
-start = time.Now()
+start := time.Now()
 
 /* Your Test Code
 Or your function call goes here ...
 */
 
-end = time.Since(start)
+end := time.Since(start)
 fmt.Println("Execution Time:", end);
