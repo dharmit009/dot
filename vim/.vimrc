@@ -82,7 +82,7 @@ set incsearch
 
 " hides those nasty tildes which no one likes
 " & dont remove that whitespace below it is required.
-set fillchars=eob:\ 
+" set fillchars=eob:\ 
 
 " SUPER IMPORTANT: ADDED FROM RWXROB Don't know what it is ...
 set viminfo='20,<1000,s1000
@@ -301,7 +301,7 @@ augroup end
 
 " VIM COLOR SETTINGS ...
 " set relative number line color to darkyellow
-highlight LineNRAbove ctermfg=DarkMagenta cterm=bold
+highlight LineNRAbove ctermfg=DarkYellow cterm=bold
 highlight LineNRBelow ctermfg=DarkBlue cterm=bold
 highlight LineNR ctermfg=DarkYellow cterm=bold
 highlight ColorColumn ctermbg=DarkMagenta
@@ -312,7 +312,7 @@ highlight link pythonFunction GruvboxDarkRedBold
 " Show the content in red whenever I exceed 72 characters.
 highlight OverLength ctermbg=LightGreen ctermfg=white guibg=#FFD9D9
 match OverLength /\%>72v.\+/
-highlight ExtraWhitespace ctermbg=LightBlue guibg=DarkRed
+highlight ExtraWhitespace ctermbg=DarkRed guibg=DarkRed
 match ExtraWhitespace /\s\+$/
 
 hi Normal guibg=NONE ctermbg=NONE

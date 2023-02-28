@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Exit if any errors ...
+set -e
+
+if [ -z "$(which neofetch)" -o -z "$(which neofetch)" ];
+then
+	echo "Warning, Seems like you don't have Vim Install properly."
+    echo "Debian: sudo apt install neofetch"
+    echo "Arch: sudo pacman -S neofetch"
+else
+	if [ -e "$HOME/.config/neofetch/config.conf" ];
+	then
+		mkdir -p "$HOME/dot-backup"
+		cp -rf "$HOME/.config/neofetch/config.conf" "$HOME/dot-backup/"
+	fi
+	ln -sf "$PWD/config.conf" "$HOME/.config/neofetch/config.conf"
+fi

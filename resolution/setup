@@ -11,6 +11,6 @@ else
 	if [ -e "/etc/X11/xorg.conf.d/10-monitor.conf" ];
 	then
 		mkdir -p "/etc/X11/xorg.conf.d/"
-		cp -rf "./10-monitor.conf" "/etc/X11/xorg.conf.d/10-monitor.conf"
+		sudo cp -rf "./10-monitor.conf" "/etc/X11/xorg.conf.d/10-monitor.conf"
 	fi
 fi

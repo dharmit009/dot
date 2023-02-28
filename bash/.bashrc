@@ -185,7 +185,7 @@ export LC_ALL=en_IN.UTF-8
 
 # Path ...
 export PATH="$PATH:~/repos/scripts/:~/repos/cmd-zet:~/go/bin:/opt/flutter/bin:"
-export PATH="$PATH:$GOBIN:/home/hmm009/.cargo/bin"
+export PATH="$PATH:$GOBIN:/home/hmm009/.cargo/bin:/home/hmm/.local/bin"
 export CDPATH=".:~:~/learning:~/java:~/repos:~/repos/zet:~/.config:~/:~/repos/dot/:./:~/subjects:"
 export GOPATH="$HOME/go"
 
@@ -204,12 +204,13 @@ export SNIPS="$HOME/repos/dot/snippets"
 export SCRIPTS="$HOME/repos/scripts/"
 export REPOS="$HOME/repos/"
 export GOBIN="$HOME/go/bin"
+export ANDROID_NDK_HOME="$HOME/android-ndk/"
 
 # Custom Aliases
 alias '?'=duck
 alias '??'=google
 alias '???'=bing
-alias brc="$EDITOR ~/.bashrc"
+alias brc="$EDITOR ~/.bashrc && source ~/.bashrc"
 alias alac="$EDITOR ~/.config/alacritty/alacritty.yml"
 alias c="clear"
 alias cp="cp -i"                          # confirm before overwriting something
@@ -222,7 +223,7 @@ alias fishes='asciiquarium'
 alias free='free -m'                      # show sizes in MB
 alias grep='grep --colour=auto'
 alias ls='ls --color=auto -h --group-directories-first'
-alias more="less"
+# alias more="less"
 alias np='nano -w PKGBUILD'
 alias open='xdg-open'
 alias r="$EDITOR -R +Goyo "
@@ -233,6 +234,8 @@ alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
 alias vm="virtualboxvm --seamless --startvm"
+alias neofetch="neofetch --w3m $HOME/.config/neofetch/planets.jpg/"
+alias vim="nvim"
 
 # Importing Personal Bashrc
 if [[ -z "$HOME/.bashrc-personal" ]];
@@ -248,9 +251,11 @@ fi
 # Misc settings ...
 set -o vi
 set keymap vi
+cita
 
 PATH="/home/hmm009/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/hmm009/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/hmm009/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/hmm009/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;
+
