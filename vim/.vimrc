@@ -22,12 +22,12 @@ set clipboard+=unnamedplus
 " VIM Tweaks ...
 set nocompatible
 set exrc
-set cursorcolumn
+" set cursorcolumn
 " provides tab-completion for all file related tasks
 " ** means search through dir and every sub dir
 set path+=**
 set autoread              " reloads the file if anything gets changed.
-set cursorline
+" set cursorline
 set emoji
 set icon
 set number

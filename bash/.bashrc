@@ -147,7 +147,7 @@ __ps1() {
 
   B=$(git branch --show-current 2>/dev/null)
   [[ $dir = "$B" ]] && B=.
-  countme="$USER$PROMPT_AT$(hostname):$dir($B)\$ "
+  countme="$USER$PROMPT_AT$(uname -n):$dir($B)\$ "
 
   [[ $B = master || $B = main ]] && b="$r"
   [[ -n "$B" ]] && B="$u($b$B$u)"
@@ -179,7 +179,7 @@ complete -C pomo pomo
 # Exports ...
 export TERM='xterm-256color'
 export CFLAGS='-Wall -Wextra -Werror'
-export EDITOR="nvim"
+export EDITOR="vim"
 export LANG=en_IN.UTF-8
 export LC_ALL=en_IN.UTF-8
 
@@ -235,7 +235,6 @@ alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
 alias vm="virtualboxvm --seamless --startvm"
 alias neofetch="neofetch --w3m $HOME/.config/neofetch/planets.jpg/"
-alias vim="nvim"
 
 # Importing Personal Bashrc
 if [[ -z "$HOME/.bashrc-personal" ]];
@@ -248,10 +247,14 @@ then
     source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 fi
 
+if [[ -z "$HOME/repos/cita" ]];
+then
+    cita
+fi
+
 # Misc settings ...
 set -o vi
 set keymap vi
-cita
 
 PATH="/home/hmm009/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/hmm009/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
