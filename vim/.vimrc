@@ -44,7 +44,7 @@ set hidden
 set mousemodel=popup
 set noerrorbells
 set cinoptions+=0
-set conceallevel=1
+set conceallevel=0
 
 " VIM Fold Methods ...
 set foldmethod=manual
@@ -95,12 +95,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'dhruvasagar/vim-table-mode'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'frazrepo/vim-rainbow'
-    Plug 'gruvbox-community/gruvbox'
+    Plug 'morhetz/gruvbox'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
-    Plug 'neoclide/coc-tabnine'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'rwxrob/vim-pandoc-syntax-simple'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
@@ -117,8 +115,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:gruvbox_undercurl='1'
   let g:gruvbox_contrast_dark="medium"
   let g:gruvbox_termcolors='256'
-  " let g:gruvbox_improved_strings=1
-  " let g:gruvbox_improved_warnings='1'
+  let g:gruvbox_improved_strings=1
+  let g:gruvbox_improved_warnings='1'
   set background=dark
   colorscheme gruvbox
 
@@ -360,8 +358,8 @@ endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
