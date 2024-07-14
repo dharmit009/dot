@@ -5,7 +5,7 @@ set -e
 
 if [ -z "$(which neofetch)" -o -z "$(which neofetch)" ];
 then
-	echo "Warning, Seems like you don't have Vim Install properly."
+	echo "Warning, Seems like you don't have Neofetch installed."
     echo "Debian: sudo apt install neofetch"
     echo "Arch: sudo pacman -S neofetch"
 else
@@ -15,4 +15,5 @@ else
 		cp -rf "$HOME/.config/neofetch/config.conf" "$HOME/dot-backup/"
 	fi
 	ln -sf "$PWD/config.conf" "$HOME/.config/neofetch/config.conf"
+    cp -r "$PWD/neofetch-kaneki.png" "$HOME/.config/neofetch/"
 fi

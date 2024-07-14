@@ -17,7 +17,7 @@ set completeopt=menuone,noinsert,noselect
 set pumheight=100
 
 " Stuff not working properly as I Intend ...
-set clipboard+=unnamedplus
+set clipboard+=unnamedplusplus
 
 " VIM Tweaks ...
 set nocompatible
@@ -279,18 +279,18 @@ fun! TrimWhiteSpace()
 endfun
 
 
-fun! ToEmo()
-    let l:save = winsaveview()
-    silent !toemo %
-    call winrestview(l:save)
-endfun
+" fun! ToEmo()
+"     let l:save = winsaveview()
+"     silent !toemo %
+"     call winrestview(l:save)
+" endfun
 
 " Creating auto group named as damns which will call the function all my
 " user defined functions and remove legacy functions which are running
 " in bg.
 augroup DAMNS
     autocmd!
-    autocmd BufWritePost * silent !toemo %
+    " autocmd BufWritePost * silent !toemo %
     autocmd BufWritePre *.go :call TrimWhiteSpace()
     autocmd BufWritePre *.py :call TrimWhiteSpace()
     autocmd BufWritePre *.md :call TrimWhiteSpace()
@@ -333,34 +333,5 @@ let &t_EI = "\e[1 q"
 " let g:completor_filetype_map = {}
 " let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}"
 
-" COC COMPELETION
-"
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-" autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc

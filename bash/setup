@@ -1,16 +1,16 @@
 #!/bin/sh 
 
 # Exit if any errors ...
-set -e 
+set -e
 
 # Check if .bashrc exist !! If yes then create backup ...
-if [ -e "$HOME/.bashrc" ];
+if [ -e "$HOME/.bashrc-personal" ];
 then 
 	mkdir -p "$HOME/dot-backup"
-	cp -rf "$HOME/.bashrc" "$HOME/dot-backup"
+	cp -rf "$HOME/.bashrc-personal" "$HOME/dot-backup"
 fi 
 
 # Point your .bashrc to the host's .bashrc
-ln -sf "$PWD/.bashrc" "$HOME/.bashrc"
+ln -sf "$PWD/.bashrc-personal" "$HOME/.bashrc-personal"
 
 

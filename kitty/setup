@@ -5,8 +5,7 @@ set -e
 
 if [ -z "$(which kitty)" ];
 then
-	echo "Warning, Seems like you don't have kitty installed on the
-    system."
+	echo "Warning, Seems like you don't have kitty installed on the system."
 else
 	if [ -e "$HOME/.config/kitty/kitty.conf" ];
 	then
@@ -14,4 +13,5 @@ else
 		cp -rf "$HOME/.config/kitty/kitty.conf" "$HOME/dot-backup/kitty/"
 	fi
 	ln -sf "$PWD/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+	ln -sf "$PWD/../gruvbox/gruvbox-kitty.conf" "$HOME/.config/kitty/gruvbox-kitty.conf"
 fi
