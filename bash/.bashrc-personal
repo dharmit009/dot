@@ -2,9 +2,8 @@
 # which you can find in your home directory.
 # source "$HOME/.bashrc-perosnal"
 
-
 # VI Settings
-set -o vi 
+set -o vi
 set keymap vi
 
 
@@ -86,12 +85,6 @@ PERL_LOCAL_LIB_ROOT="/home/hmm009/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_
 PERL_MB_OPT="--install_base \"/home/hmm009/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;
 
-# Quote Executioner:
-
-if [[ -d "$HOME/repos/quotes" && -x "$HOME/repos/scripts/cita" ]]
-then
-    cita && sleep 2
-fi
 
 # PS1 Config ...
 
@@ -142,3 +135,29 @@ __ps1() {
 
 }
 PROMPT_COMMAND="__ps1"
+
+## Run neofetch if tmux is not running else
+ps_name="tmux: client"
+ps_count=$(pgrep -axc "$ps_name")
+
+if [ "$ps_count" -ge 1 ];
+then
+
+    # Run Quote Executioner:
+    if [[ -d "$HOME/repos/quotes" && -x "$HOME/repos/scripts/cita" ]]
+    then
+        cita
+    fi
+
+else
+    if [ -n "$(which neofetch)" ];
+    then
+        neofetch
+    fi
+fi
+
+PATH="/home/hmm009/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/hmm009/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/hmm009/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/hmm009/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;
