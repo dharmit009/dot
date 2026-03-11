@@ -1,6 +1,5 @@
--- Import my configuration --
-require("core.options")
-require("core.keymap")
-require("core.autocmd")
-require("lazy_setup")
-
+require("config.diagnostics")
+require("config.options")
+require("config.keymaps")
+require("config.highlights")
+require("config.lazy")

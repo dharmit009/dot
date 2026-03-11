@@ -1,62 +1,38 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
-    build = ":TSUpdate",
-    dependencies = {
-        "windwp/nvim-ts-autotag",
-    },
-    config = function()
-        local treesitter = require("nvim-treesitter.configs")
-
-        treesitter.setup({
-            auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-            autotag = {
-                enable = true,
-            },
-            ensure_installed = {
-                "go",
-                "json",
-                "javascript",
-                "typescript",
-                "tsx",
-                "yaml",
-                "html",
-                "css",
-                "markdown",
-                "markdown_inline",
-                "bash",
-                "lua",
-                "vim",
-                "dockerfile",
-                "gitignore",
-                "c",
-                "rust",
-                "python",
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
-                },
-            },
-            rainbow = {
-                enable = true,
-                disable = { "html" },
-                extended_mode = false,
-                max_file_lines = nil,
-            },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
-        })
-    end,
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		branch = "master",
+		commit = "066fd6505377e3fd4aa219e61ce94c2b8bdb0b79",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"c",
+					"lua",
+					"vim",
+					"vimdoc",
+					"query",
+					"markdown",
+					"markdown_inline",
+					"typescript",
+				},
+				sync_install = false,
+				auto_install = false,
+				ignore_install = { "javascript" },
+				highlight = {
+					enable = true,
+					disable = { "c", "rust" },
+					disable = function(lang, buf)
+						local max_filesize = 100 * 1024 -- 100 KB
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
+					end,
+					additional_vim_regex_highlighting = false,
+				},
+			})
+		end,
+	},
 }
