@@ -17,8 +17,8 @@ return {
 					"markdown_inline",
 					"typescript",
 				},
-				sync_install = false,
-				auto_install = false,
+				sync_install = true,
+				auto_install = true,
 				ignore_install = { "javascript" },
 				highlight = {
 					enable = true,
@@ -33,6 +33,7 @@ return {
 					additional_vim_regex_highlighting = false,
 				},
 			})
+			vim.env.CFLAGS = (vim.env.CFLAGS or "") .. " -Wno-unused-value"
 		end,
 	},
 }

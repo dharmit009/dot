@@ -75,6 +75,7 @@ alias gitall="git fetch && git pull && git add . && git commit && git push"
 alias shot="sleep 3 && flameshot gui"
 alias ping="ping -c 3"
 alias vm="virtualboxvm --seamless --startvm"
+# alias nvim="vim"
 # alias neofetch="neofetch --w3m $HOME/.config/neofetch/planets.jpg/"
 
 
@@ -88,76 +89,133 @@ PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;
 
 # PS1 Config ...
 
-PROMPT_LONG=20
-PROMPT_MAX=95
-PROMPT_AT=@
-
-function set_virtualenv(){
-	if test -z "$VIRTUAL_ENV" ; then
-	    PYTHON_VIRTUALENV=""
-	else
-	    PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
-	fi
-}
-
-
-__ps1() {
-  local P='$' dir="${PWD##*/}" B countme short long double\
-    r='\[\e[1;31m\]' g='\[\e[1;30m\]' h='\[\e[1;34m\]' \
-    u='\[\e[1;33m\]' p='\[\e[1;34m\]' w='\[\e[1;35m\]' \
-    b='\[\e[1;36m\]' x='\[\e[1;0m\]'
-
-  [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
-  [[ $PWD = / ]] && dir=/
-  [[ $PWD = "$HOME" ]] && dir='~'
-
-  B=$(git branch --show-current 2>/dev/null)
-  [[ $dir = "$B" ]] && B=.
-  countme="$USER$PROMPT_AT$(uname -n):$dir($B)\$ "
-
-  [[ $B = master || $B = main ]] && b="$r"
-  [[ -n "$B" ]] && B="$u($b$B$u)"
-
-  # short="$r[$u\u$g$r$PROMPT_AT$h\h$g$p: $w$dir$r]$B$p$P$x$u[$r r $g g $h h $u u $p p $w w $b b $x x] "
-  # r -> red.
-  # g -> grey.
-  # h -> blue1.
-  # u -> orange.
-  # p -> blue2.
-  # w -> purple.
-  # b -> green.
-  # x -> white with yellowish tint.
-
-  set_virtualenv
-
-  short="$w$PYTHON_VIRTUALENV$r[$u\u$g$r$PROMPT_AT$h\h$g$p: $w$dir$r]$B$b$P$x "
-  PS1="$short"
-
-}
-PROMPT_COMMAND="__ps1"
+# PROMPT_LONG=20
+# PROMPT_MAX=95
+# PROMPT_AT=@
+# 
+# function set_virtualenv(){
+# 	if test -z "$VIRTUAL_ENV" ; then
+# 	    PYTHON_VIRTUALENV=""
+# 	else
+# 	    PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+# 	fi
+# }
+# 
+# 
+# __ps1() {
+#   local P='$' dir="${PWD##*/}" B countme short long double\
+#     r='\[\e[1;31m\]' g='\[\e[1;30m\]' h='\[\e[1;34m\]' \
+#     u='\[\e[1;33m\]' p='\[\e[1;34m\]' w='\[\e[1;35m\]' \
+#     b='\[\e[1;36m\]' x='\[\e[1;0m\]'
+# 
+#   [[ $EUID == 0 ]] && P='#' && u=$r && p=$u # root
+#   [[ $PWD = / ]] && dir=/
+#   [[ $PWD = "$HOME" ]] && dir='~'
+# 
+#   B=$(git branch --show-current 2>/dev/null)
+#   [[ $dir = "$B" ]] && B=.
+#   countme="$USER$PROMPT_AT$(uname -n):$dir($B)\$ "
+# 
+#   [[ $B = master || $B = main ]] && b="$r"
+#   [[ -n "$B" ]] && B="$u($b$B$u)"
+# 
+#   # short="$r[$u\u$g$r$PROMPT_AT$h\h$g$p: $w$dir$r]$B$p$P$x$u[$r r $g g $h h $u u $p p $w w $b b $x x] "
+#   # r -> red.
+#   # g -> grey.
+#   # h -> blue1.
+#   # u -> orange.
+#   # p -> blue2.
+#   # w -> purple.
+#   # b -> green.
+#   # x -> white with yellowish tint.
+# 
+#   set_virtualenv
+# 
+#   short="$w$PYTHON_VIRTUALENV$r[$u\u$g$r$PROMPT_AT$h\h$g$p: $w$dir$r]$B$b$P$x "
+#   PS1="$short"
+# 
+# }
+# PROMPT_COMMAND="__ps1"
 
 ## Run neofetch if tmux is not running else
 ps_name="tmux: client"
 ps_count=$(pgrep -axc "$ps_name")
 
-if [ "$ps_count" -ge 1 ];
+if pacman -Q "neofetch" > /dev/null 2>&1;
 then
-
-    # Run Quote Executioner:
-    if [[ -d "$HOME/repos/quotes" && -x "$HOME/repos/scripts/cita" ]]
+    if [ "$ps_count" -ge 1 ];
     then
-        cita
-    fi
 
-else
-    if [ -n "$(which neofetch)" ];
-    then
-        neofetch
+        # Run Quote Executioner:
+        if [[ -d "$HOME/repos/quotes" && -x "$HOME/repos/scripts/cita" ]]
+        then
+            cita
+        fi
+
+    else
+        if [ -n "$(which neofetch)" ];
+        then
+            neofetch
+        fi
     fi
 fi
+
 
 PATH="/home/hmm009/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/hmm009/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/hmm009/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/hmm009/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/hmm009/perl5"; export PERL_MM_OPT;
+
+
+# ============================================================================
+# Kanagawa Truecolor Prompt Configuration (`~/.bashrc-personal`)
+# ============================================================================
+K_FUJI_WHITE='\[\e[38;2;220;215;186m\]'
+K_FUJI_GRAY='\[\e[38;2;114;113;105m\]'
+K_CRYSTAL_BLUE='\[\e[38;2;126;156;216m\]'
+K_SPRING_BLUE='\[\e[38;2;127;180;202m\]'
+K_SURIMI_ORANGE='\[\e[38;2;255;160;102m\]'
+K_ONI_VIOLET='\[\e[38;2;149;127;184m\]'
+K_SPRING_GREEN='\[\e[38;2;152;187;108m\]'
+K_WAVE_RED='\[\e[38;2;228;104;118m\]'
+K_RESET='\[\e[0m\]'
+
+function set_virtualenv(){
+    if test -z "$VIRTUAL_ENV" ; then
+        PYTHON_VIRTUALENV=""
+    else
+        PYTHON_VIRTUALENV="${K_ONI_VIOLET}[$(basename "$VIRTUAL_ENV")]${K_RESET} "
+    fi
+}
+
+__ps1() {
+    local P='$' dir="${PWD##*/}" B short
+    local r=$K_WAVE_RED
+    local g=$K_FUJI_GRAY
+    local h=$K_CRYSTAL_BLUE
+    local u=$K_SURIMI_ORANGE
+    local p=$K_SPRING_BLUE
+    local w=$K_ONI_VIOLET
+    local b=$K_SPRING_GREEN
+    local x=$K_FUJI_WHITE
+
+    [[ $EUID == 0 ]] && P='#' && u=$r
+    [[ $PWD = / ]] && dir=/
+    [[ $PWD = "$HOME" ]] && dir='~'
+
+    # Handle git branch display cleanly
+    B=$(git branch --show-current 2>/dev/null)
+    [[ -n "$B" ]] && {
+        [[ $B = master || $B = main ]] && b=$r
+        B=" $b($B)$x"
+    }
+
+    set_virtualenv
+
+    # Clean, artifact-free prompt layout: [user@host: dir] branch $
+    short="$w$PYTHON_VIRTUALENV$r[$u\u$g@$h\h$g:$p$dir$r]$B$x$P "
+    PS1="$short"
+}
+
+PROMPT_COMMAND="__ps1"

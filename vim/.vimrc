@@ -17,7 +17,7 @@ set completeopt=menuone,noinsert,noselect
 set pumheight=100
 
 " Stuff not working properly as I Intend ...
-set clipboard+=unnamedplusplus
+" set clipboard+=unnamedplusplus
 
 " VIM Tweaks ...
 set nocompatible
@@ -27,7 +27,7 @@ set exrc
 " ** means search through dir and every sub dir
 set path+=**
 set autoread              " reloads the file if anything gets changed.
-" set cursorline
+set cursorline
 set emoji
 set icon
 set number
@@ -38,7 +38,7 @@ set ruler
 set wildmenu
 set wildmode=full
 set nowrap
-" set colorcolumn=80
+set colorcolumn=80
 set signcolumn=yes
 set hidden
 set mousemodel=popup
@@ -104,6 +104,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'tpope/vim-surround'
     " Plug 'vim-airline/vim-airline'
     Plug 'vim-pandoc/vim-pandoc'
+    Plug 'menisadi/kanagawa.vim'
   call plug#end()
 
   " Plugin Settings ...
@@ -118,7 +119,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:gruvbox_improved_strings=1
   let g:gruvbox_improved_warnings='1'
   set background=dark
-  colorscheme gruvbox
+  colorscheme kanagawa
 
   " Markdown Plugin Settings for (iamcco/markdown-preview.nvim) ...
   " let mkdp_auto_start = 1
