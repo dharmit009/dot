@@ -45,7 +45,8 @@ if kanagawa_ok then
       local theme = colors.theme
 
       return {
-        Visual = { bg = '#2d4f67', fg = 'NONE' }, -- Kanagawa wave/dragon visual selection background
+        VisualNOS = { bg = '#727229', fg = 'NONE' },
+        Visual = { bg = '#727229', fg = 'NONE' }, -- Kanagawa wave/dragon visual selection background
         Cursor = { fg = '#181616', bg = '#FFA066' },
         NormalFloat = { bg = theme.ui.bg_m3 },
         FloatBorder = { bg = theme.ui.bg_m3, fg = theme.ui.bg_p2 },
